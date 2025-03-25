@@ -14,15 +14,16 @@
 				return "-Infinity"
 			}
 			for (let i = 0; i<arr.length-1;i++){
+				let current_min = i
 				for(let j = i+1; j < arr.length;j++){
-					if(arr[j] < arr[j-1]){
-						let temp = arr[j]
-						arr[j] = arr[j-1]
-						arr[j-1] = temp; 
-					}
+					current_min = j
+				}
+				let temp = arr[i];
+				arr[i] = arr[current_min];
+				arr[current_min] = temp;
 				}
 			}
-			return arr[arr.length-2]
+		return arr[arr.length-2]
 		}
 
 		function Main() {
