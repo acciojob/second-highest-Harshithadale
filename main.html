@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -8,48 +9,37 @@
 <body>	
 	<script>
 		function secondHighest(arr) {
-			// Convert input strings to numbers
-			arr = arr.map(Number);
-
-			// Remove duplicates
-			let uniqueArr = [...new Set(arr)];
-
-			// Edge case: If there is only one unique number or an empty array
-			if (uniqueArr.length < 2) return -Infinity;
-
-			// Find the highest and second highest numbers in a single pass
-			let max = -Infinity, secondMax = -Infinity;
-			for (let num of uniqueArr) {
-				if (num > max) {
-					secondMax = max;
-					max = num;
-				} else if (num > secondMax) {
-					secondMax = num;
-				}
+			//Write your code here
+			if(arr.length <= 1 || [...new Set(arr)].length == 1){
+				return -Infinity
 			}
-			return secondMax;
+			for(let i = 0;i< arr.length-1;i++){
+				current_min = i;
+				for(let j = i+1;j< arr.length;j++){
+					if(arr[j] < arr[current_min]){
+						current_min = j;
+					}
+				}
+				let temp = arr[i];
+				arr[i] = arr[current_min];
+				arr[current_min] = temp;
+			}
+			return arr[arr.length-2]
 		}
 
 		function Main() {
-			var n = parseInt(prompt("Enter the number of elements"), 10);
-			if (isNaN(n) || n <= 0) {
-				alert("Invalid input. Please enter a positive number.");
-				return;
-			}
-
+			var n = prompt("Enter the number of elements");
 			var arr = [];
 			for (var i = 0; i < n; i++) {
-				let num = parseFloat(prompt("Enter element " + (i + 1)));
-				if (isNaN(num)) {
-					alert("Invalid input. Please enter only numbers.");
-					return;
-				}
-				arr.push(num);
+				arr[i] = prompt("Enter element " + (i+1));
 			}
-			alert("Second highest element: " + secondHighest(arr));
+			alert(secondHighest(arr));
 		}
 		Main();
 	</script>
+
+    <script type="text/javascript" src="./script.js">
+</script>
 
 </body>
 
